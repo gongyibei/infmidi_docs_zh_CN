@@ -1,7 +1,7 @@
 .. include:: ../README.rst
 
 .. toctree::
-   :caption: Getting Started
+   :caption: 教程
    :maxdepth: 2
    :hidden:
 
@@ -16,7 +16,7 @@
 
 
 .. toctree::
-   :caption: API inference
+   :caption: API参考
    :maxdepth: 2
    :hidden:
 
@@ -25,7 +25,7 @@
 
 
 .. toctree::
-   :caption: Miscellaneous
+   :caption: 其他
    :maxdepth: 2
    :hidden:
 

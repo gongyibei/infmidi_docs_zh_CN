@@ -1,35 +1,35 @@
 Clip
 ====
-The Clip class is inspired by some DAWs such as Ableton Live and Bitwig Studio.
+
+.. hint:: 
+
+    大部分操作符都有一个inplace版本和一个method版本。  点击 :doc:`速查表/Clip <../cheat>` 查看操作符的对应列表。
+
+初始化
+------
 
 
-Initialize
-----------
-
-
-Initialize an empty clip.
-
+初始化一个空 ``Clip``
 
     >>> from infmidi import Clip
     >>> Clip()
 
-Initialize with items.
-
+使用音符列表初始化。
 
     >>> from infmidi import Note, Clip
     >>> items = [Note('C4'), Note('E4'), Note('G4')]
     >>> clip = Clip(items)
     >>> clip
-    Clip(len(notes)=3, len(events)=0, length=1.00)
+    Clip(n_notes)=3, n_events=0, length=1.00)
     >>> clip.notes
     NoteSet([
-      Note(name="C4", value=60, freq=261.63, velocity=127, length=1.00, location=0.00, channel=0),
-      Note(name="E4", value=64, freq=329.63, velocity=127, length=1.00, location=0.00, channel=0),
-      Note(name="G4", value=67, freq=392.00, velocity=127, length=1.00, location=0.00, channel=0)
+      Note(name="C4", value=60, frequency=261.63, velocity=127, length=1.00, location=0.00, channel=0),
+      Note(name="E4", value=64, frequency=329.63, velocity=127, length=1.00, location=0.00, channel=0),
+      Note(name="G4", value=67, frequency=392.00, velocity=127, length=1.00, location=0.00, channel=0)
     ])
 
-Item could be Note、Event or Clip.
 
+列表里元素也可以是 ``Event`` 和 ``Clip``。
 
     >>> from infmidi import Note, PitchBend, Clip
     >>> item1 = Note('B4')
@@ -38,67 +38,114 @@ Item could be Note、Event or Clip.
     >>> items = [item1, item2, item3]
     >>> clip = Clip(items)
     >>> clip
-    Clip(len(notes)=4, len(events)=1, length=1.00)
+    Clip(n_notes=4, n_events=1, length=1.00)
     >>> clip.notes
     NoteSet([
-      Note(name="C4", value=60, freq=261.63, velocity=127, length=1.00, location=0.00, channel=0),
-      Note(name="E4", value=64, freq=329.63, velocity=127, length=1.00, location=0.00, channel=0),
-      Note(name="G4", value=67, freq=392.00, velocity=127, length=1.00, location=0.00, channel=0),
-      Note(name="B4", value=71, freq=493.88, velocity=127, length=1.00, location=0.00, channel=0)
+      Note(name="C4", value=60, frequency=261.63, velocity=127, length=1.00, location=0.00, channel=0),
+      Note(name="E4", value=64, frequency=329.63, velocity=127, length=1.00, location=0.00, channel=0),
+      Note(name="G4", value=67, frequency=392.00, velocity=127, length=1.00, location=0.00, channel=0),
+      Note(name="B4", value=71, frequency=493.88, velocity=127, length=1.00, location=0.00, channel=0)
     ])
     >>> clip.events
     EventSet([PitchBend(pitch=0.50, location=0.00, channel=0)])
 
-NoteSet & EventSet
-------------------
-The notes and events in ``Clip`` are save in a :class:`NoteSet <infmidi.core.note.NoteSet>` object and  a :class:`NoteSet <infmidi.core.note.NoteSet>` object respectly.
 
-.. note:: 
-    The ``NoteSet`` and ``EventSet`` are inherited from `sortedcontainers.SortedSet <https://grantjenks.com/docs/sortedcontainers/sortedset.html>`_.
+增删
+----
 
+添加 ``Note``
 
-There are two rules to add ``Note`` to ``NoteSet``.
+.. code:: python
 
-1. If there is a note in ``NoteSet`` with the same ``value``, ``location`` and ``channel`` as the newly added one, the old one will be replaced.
-2. If the existing notes in the ``NoteSet`` overlaps with the newly added one, the lengths of those notes are reduced to eliminate the overlap.
+    # 添加音符（原地修改）
+    clip += Note('C4')
+    clip.add(Note('C4'))
 
-    >>> from infmidi import Note, NoteSet
-    >>> ns = NoteSet()
-    >>> ns.add(Note('C4'))
-    >>> ns
-    NoteSet([Note(name="C4", value=60, freq=261.63, velocity=127, length=1.00, location=0.00, channel=0)])
-    >>> ns.add(Note('C4', velocity=66, location=5, channel=6))
-    >>> ns
-    NoteSet([
-      Note(name="C4", value=60, freq=261.63, velocity=127, length=1.00, location=0.00, channel=0),
-      Note(name="A4", value=69, freq=440.00, velocity=66, length=1.00, location=5.00, channel=6)
-    ])
-    >>> ns.add(Note('C4', velocity=77, length=3., location=5, channel=6))
-    >>> ns
-    NoteSet([
-      Note(name="C4", value=60, freq=261.63, velocity=127, length=1.00, location=0.00, channel=0),
-      Note(name="A4", value=69, freq=440.00, velocity=77, length=3.00, location=5.00, channel=6)
-    ])
-    >>> ns.add(Note('C4', location=0.5))
-    >>> ns
-    NoteSet([
-      Note(name="C4", value=60, freq=261.63, velocity=127, length=0.50, location=0.00, channel=0),
-      Note(name="C4", value=60, freq=261.63, velocity=127, length=1.00, location=0.50, channel=0),
-      Note(name="A4", value=69, freq=440.00, velocity=77, length=3.00, location=5.00, channel=6)
-    ])
+    # 添加音符（创建副本）
+    new = clip + Note('C4')
+    new = clip.add(Note('C4'), inplace=False)
 
-There is one rule to add ``Event`` to ``EventSet``.
+    # 不同方法在第4拍的位置添加音符 C4
+    clip += Note('C4', location=4)
+    clip += Note('C4') >> 4
+    clip.add(Note('C4'), 4)
+    clip.add(Note('C4') >> 4)
+    clip.add(Note('C4') >> 5, 4) # add 方法的 location 会覆盖 Note 本身的 location
 
-1. If there is a event in ``EventSet`` with the same ``__class__``, ``location`` and ``channel`` as the newly added one, the old one will be replaced.
+删除 ``Note``
 
 
+.. code:: python
 
-Add & Remove item
------------------
+    # 删除第4拍的音符 C4
+    clip -= Note('C4', location = 4) # 不存在时不会报错
+    clip.discard(Note('C4') >> 4) # 不存在时不会报错
+    clip.remove(Note('C4') >> 4) # 不存在时会报错
 
 
-Time & Pitch shift
-------------------
+添加 ``Event``
+
+.. code:: python
+
+    # 第4拍添加PitchBend事件
+    clip += PitchBend(0.5) >> 4
+    clip.add(PitchBend(0.5), 4) # 
+
+
+删除 ``Event``
+
+.. code:: python
+
+    # 删除第4拍的PitchBend
+    clip -= PitchBend(0.5) >> 4 # 不存在时不会报错
+    clip.discard(PitchBend(0.5) >> 4) # 不存在时不会报错
+    clip.remove(PitchBend(0.5) >> 4) # 不存在时会报错
+
+
+添加 ``Clip``
+
+.. code:: python
+
+    # 将 clip1 与 clip2 混合
+    clip1 += clip2
+    clip1.add(clip2)
+
+    # 将 clip2 添加到 clip1 的第4拍
+    clip1 += clip2 >> 4
+    clip.add(clip2, 4)
+
+    
+
+转调
+----
+
+
+升调
+
+.. code:: python
+
+    # 所有音符升高5个半音（原地修改）
+    clip += 5
+
+    # 所有音符升高5个半音（创建副本）
+    new = clip + 5
+    new = clip.up(5, inplace=False)
+
+降调
+
+.. code:: python
+
+    # 所有音符降低5个半音（原地修改）
+    clip -= 5
+    clip.down(5)
+
+    # 所有音符降低5个半音（创建副本）
+    new = clip - 5
+    new = clip.down(5, inplace=False)
+
+
+平移
+----
 
     >>> clip = Clip([Note('C4'), Note('E4') >> 1, Note('G4') >> 2])
     >>> plot(clip)
@@ -106,7 +153,7 @@ Time & Pitch shift
 .. image:: ../../_static/imgs/clip/time_shift1.png
     :align: center
 
-Using ``>>`` to shift the notes to the right along the timeline.
+使用 ``>>`` 将所有音符和事件沿时间轴往右平移。
 
     >>> plot(clip >> 2)
 
@@ -114,14 +161,24 @@ Using ``>>`` to shift the notes to the right along the timeline.
     :align: center
 
 
-Scale & Zoom
-------------
+缩放
+----
+
+.. code:: python
+
+
+    # 将clip拉伸为原来两倍，长度和位置都会改变
+    clip ^= 2
+
+    # 将clip的所有音符长度拉伸为原来两倍，只有长度会改变
+    clip *= 2
 
 
 
 
-Concat & Extend
----------------
+拼接
+----
+使用 ``|`` 来拼接 ``Clip``。
 
     >>> clip = chord('C4:M7') | chord('A4:m7') | chord('F4:M7') | chord('G4:7')
     >>> plot(clip)
@@ -130,7 +187,7 @@ Concat & Extend
     :align: center
 
 
-The following has the same result.
+使用 ``extend`` 拼接多个 ``Clip``。
 
     >>> clip = Clip()
     >>> clip.extend([chord('C4:M7'), chord('A4:m7'), chord('F4:M7'), chord('G4:7')])
@@ -139,33 +196,74 @@ The following has the same result.
 .. image:: ../../_static/imgs/clip/concat.png
     :align: center
 
-Rverse & Invert
----------------
 
-Repeat
-------
-
-    >>> clip = Clip([Note()])
-
-
-Channel select
---------------
-
-Slice
------
-
-
-It's very usefull for you to send messages to different Track in DAW.
-
-.. hint:: 
-
-    All operators above have an inpalce version and an method version, click :doc:`here <../cheat>` to see the cheat sheet.
-    
-
-Get messages
-------------
-
-More
+翻转
 ----
 
+.. code:: python
+    
+    # 上下翻转（原地修改）
+    clip.invert()
 
+    # 上下翻转（创建副本）
+    new = clip.invert(inplace=False)
+    new = ~clip
+
+
+    # 水平翻转（原地修改）
+    clip.reverse()
+
+    # 水平翻转（创建副本）
+    new = clip.reverse(inplace=False)
+    new = reversed(clip)
+
+
+重复
+----
+
+.. code:: python
+
+    # 将clip重复5次（原地修改）
+    clip **= 5
+    clip.repeate(5)
+
+    # 将clip重复5次（创建副本）
+    new = clip ** 5
+    new = clip.repeate(inplace=False)
+    
+
+通道
+----
+
+.. code:: python
+
+    # 将所有音符与事件通道设为9（原地修改）
+    clip @= 9
+    clip.at(9)
+
+    # 将所有音符与事件通道设为9（创建副本）
+    new = clip @ 9
+    new = clip.at(9, inplace=False)
+    
+
+切片
+-----
+使用切片可以让你选择特定片段
+
+.. code:: python
+
+    # 获取clip 8拍到16拍的副本
+    new = clip[8:16]
+
+    # clip前8拍音符升高7个半音
+    clip[:8] += 7
+
+    # 将clip前8拍音符与事件向右平移4拍
+    clip[:8] >>= 4
+
+    # 删除clip前四拍音符和事件
+    clip[:4] = None
+    clip.clear(0, 4)
+
+    # clip 前8拍音符与事件改为通道7
+    clip[:8] @= 7
