@@ -39,7 +39,7 @@ INFMIDI是一个用Python编写的MIDI编辑库，有很多高级的语法帮助
 .. code:: python
     
     # 在第8拍添加音符C4
-    clip.add(Note('C4'), 8)
+    clip += Note('C4', location=8)
 
 - **时间切片**：通过时间切片，可以选定特定时间段的MIDI事件进行修改。
 
