@@ -48,14 +48,6 @@ INFMIDI是一个用Python编写的MIDI编辑库，有很多高级的语法帮助
     # 8拍到16拍音符升高4个半音
     clip[8:16] += 4
 
-- **运算符重载**：通过运算符对MIDI进行快速编辑。
-
-
-.. code:: python
-
-    # 重复4次
-    clip **= 4
-
 - **生成器**： 通过生成器函数，来快速生成特定MIDI片段
 
 .. code:: python
@@ -69,9 +61,6 @@ INFMIDI是一个用Python编写的MIDI编辑库，有很多高级的语法帮助
 
     # 延迟
     delay(clip, n=3, length=0.5, decay=0.9)
-
-
-
 
 
 
