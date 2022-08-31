@@ -12,7 +12,11 @@ INFMIDI
     :target: https://infmidi.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
-INFMIDI是一个用Python编写的Midi编辑库，有很多高级的语法帮助你快速编辑和生成Midi文件。你也可以用它来辅助编曲、用代码创作音乐。
+介绍
+----
+
+INFMIDI是一个用Python编写的MIDI编辑库，有很多高级的语法帮助你快速编辑和生成MIDI文件。你也可以用它来辅助编曲、用代码创作音乐。
+
 
 文档
 ----
@@ -25,19 +29,28 @@ INFMIDI是一个用Python编写的Midi编辑库，有很多高级的语法帮助
 - :doc:`🎤【基础】<start/core/index>`: 核心类（ ``Event``, ``Note``, ``Clip``, ``Track``, ``Midi`` ）的用法介绍。
 - :doc:`🎻【生成器】<start/generator/index>`: 一些快速生成 ``Clip`` 的函数集。
 - :doc:`🎸【效果器】<start/effects/index>` : 一些快速处理 ``Clip`` 的函数集.
-- :doc:`🥁【设备】<start/devices/index>`:  一些用于播放Midi，与编曲软件交互的对象。
+- :doc:`🥁【设备】<start/devices/index>`:  一些用于播放MIDI，与编曲软件交互的对象。
 - :doc:`🎺【示例】<start/examples/index>`:  一些例子帮助你学习INFMIDI的用法。
-- :doc:`🎧【速查表】<start/cheat>`: 查询核心类的用法，以及音乐和Midi的相关信息汇总。
+- :doc:`🎧【速查表】<start/cheat>`: 查询核心类的用法，以及音乐和MIDI的相关信息汇总。
+
+特性
+----
+
+- **绝对时间**：使用绝对时间而不是事件间隔来确定MIDI事件，意味着你可以很方便的在任何时间点向MIDI中添加音符或者MIDI事件。
+- **时间切片**：通过时间切片，可以选定特定时间段的MIDI事件进行修改。
+- **运算符重载**：可以通过丰富的运算符对MIDI进行快速编辑。
+
 
 
 相关项目
 --------
-- mido
-- pretty-midi
-- music21
-- musicpy
-- muspy
-- pypianoroll
+目前已有很多优秀的MIDI和音乐相关Python库，不同的项目都有自己各自的特点和优势。本项目不是为了替代他们，而是作为一个补充。
+
+- `mido <https://github.com/mido/mido>`_: MIDI底层库，本项目也是基于mido开发的。
+- `music21 <https://github.com/cuthbertLab/music21>`_: 由MIT开发的计算音乐分析库，可以处理多种音乐格式。
+- `pretty-midi <https://github.com/craffel/pretty-midi>`_: 包含用于处理MIDI数据的实用函数和类，用于从MIDI中提取和修改信息。
+- `musicpy <https://github.com/Rainbow-Dreamer/musicpy>`_: Musicpy是一种基于Python的音乐编程语言，通过音乐理论和算法以非常方便的语法编写音乐。
+- `muspy <https://github.com/salu133445/muspy>`_: 主要为深度学习中符号音乐生成任务，提供包括数据集管理、数据 I/O、数据预处理和模型评估等工具。
 
 
 
