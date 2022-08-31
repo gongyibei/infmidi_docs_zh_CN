@@ -22,53 +22,62 @@ INFMIDI是一个用Python编写的MIDI编辑库，有很多高级的语法帮助
 
 以下是本项目文档的列表，点击关键词跳转到你想要了解的主题页面。
 
-- :doc:`🎼【安装】<start/install>` : 详细安装教程。如果只想使用基础功能，可以使用 ``pip install infmidi`` 进行安装。
-- :doc:`🎹【快速开始】 <start/quickstart>`: 一些基础示例，帮助你快速入门 
-- :doc:`🎤【基础】<start/core/index>`: 核心类（ ``Event``, ``Note``, ``Clip``, ``Track``, ``Midi`` ）的用法介绍。
-- :doc:`🎻【生成器】<start/generator/index>`: 一些快速生成 ``Clip`` 的函数集。
-- :doc:`🎸【效果器】<start/effects/index>` : 一些快速处理 ``Clip`` 的函数集.
-- :doc:`🥁【设备】<start/devices/index>`:  一些用于播放MIDI，与编曲软件交互的对象。
-- :doc:`🎺【示例】<start/examples/index>`:  一些例子帮助你学习INFMIDI的用法。
-- :doc:`🎧【速查表】<start/cheat>`: 查询核心类的用法，以及音乐和MIDI的相关信息汇总。
+- `🎼【安装】<https://infmidi.readthedocs.io/zh/latest/start/install.html>`_: 详细安装教程。如果只想使用基础功能，可以使用 ``pip install infmidi`` 进行安装。
+- `🎹【快速开始】 <https://infmidi.readthedocs.io/zh/latest/start/quickstart.html>`_: 一些基础示例，帮助你快速入门 
+- `🎤【基础】<https://infmidi.readthedocs.io/zh/latest/start/core/index>`_: 核心类（ ``Event``, ``Note``, ``Clip``, ``Track``, ``Midi`` ）的用法介绍。
+- `🎻【生成器】<https://infmidi.readthedocs.io/zh/latest/start/generator/index>`_: 一些快速生成 ``Clip`` 的函数集。
+- `🎸【效果器】<https://infmidi.readthedocs.io/zh/latest/start/effects/index>`_ : 一些快速处理 ``Clip`` 的函数集.
+- `🥁【设备】<https://infmidi.readthedocs.io/zh/latest/start/devices/index>`_:  一些用于播放MIDI，与编曲软件交互的对象。
+- `🎺【示例】<https://infmidi.readthedocs.io/zh/latest/start/examples/index>`_:  一些例子帮助你学习INFMIDI的用法。
+- `🎧【速查表】<https://infmidi.readthedocs.io/zh/latest/start/cheat>`_: 查询核心类的用法，以及音乐和MIDI的相关信息汇总。
 
 特性
 ----
 
 - **绝对时间**：使用绝对时间而不是事件间隔来确定MIDI事件，意味着你可以很方便的在任何时间点向MIDI中添加音符或者MIDI事件。
 
-.. code:: python
-    
-    # 在第8拍添加音符C4
-    clip.add(Note('C4'), 8)
+.. toggle:: 
 
+    .. code:: python
+        
+        # 在第8拍添加音符C4
+        clip.add(Note('C4'), 8)
 
 - **时间切片**：通过时间切片，可以选定特定时间段的MIDI事件进行修改。
 
-.. code:: python
-    
-    # 8拍到16拍音符升高4个半音
-    clip[8:16] += 4
+.. toggle:: 
+
+    .. code:: python
+        
+        # 8拍到16拍音符升高4个半音
+        clip[8:16] += 4
 
 - **运算符重载**：通过运算符对MIDI进行快速编辑。
 
-.. code:: python
+.. toggle:: 
 
-    # 重复4次
-    clip **= 4
+    .. code:: python
+
+        # 重复4次
+        clip **= 4
 
 - **生成器**： 通过生成器函数，来快速生成特定MIDI片段
 
-.. code:: python
+.. toggle:: 
 
-    # 和弦进行
-    progression = sheet('C4:M7 A4:m9|F4:M7 G4:7')
+    .. code:: python
+
+        # 和弦进行
+        progression = sheet('C4:M7 A4:m9|F4:M7 G4:7')
 
 - **效果器**：通过效果器函数来处理MIDI
 
-.. code:: python
+.. toggle:: 
 
-    # 延迟
-    delay(clip, n=3, length=0.5, decay=0.9)
+    .. code:: python
+
+        # 延迟
+        delay(clip, n=3, length=0.5, decay=0.9)
 
 
 
