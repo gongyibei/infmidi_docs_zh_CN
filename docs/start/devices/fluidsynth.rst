@@ -34,3 +34,16 @@ Windows
 1. 前往 `fluidsynth 发布页面 <https://github.com/FluidSynth/fluidsynth/releases>`_ 进行下载安装。
 2. 解压缩。
 3. 添加路径 ``fluidsynth-xxx\bin`` 到系统环境变量
+
+使用
+----
+
+.. code:: python
+
+    from infmidi.devices import FluidSynth
+    synth = FluidSynth()
+
+    # 生成item (Note, Clip, Track or Midi).
+    ...
+
+    synth(item)
