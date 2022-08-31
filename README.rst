@@ -22,14 +22,14 @@ INFMIDI是一个用Python编写的MIDI编辑库，有很多高级的语法帮助
 
 以下是本项目文档的列表，点击关键词跳转到你想要了解的主题页面。
 
-- `🎼【安装】<https://infmidi.readthedocs.io/zh/latest/start/install.html>`_ : 详细安装教程。如果只想使用基础功能，可以使用 ``pip install infmidi`` 进行安装。
-- `🎹【快速开始】 <https://infmidi.readthedocs.io/zh/latest/start/quickstart.html>`_ : 一些基础示例，帮助你快速入门 
-- `🎤【基础】<https://infmidi.readthedocs.io/zh/latest/start/core/index>`_: 核心类（ ``Event``, ``Note``, ``Clip``, ``Track``, ``Midi`` ）的用法介绍。
-- `🎻【生成器】<https://infmidi.readthedocs.io/zh/latest/start/generator/index>`_ : 一些快速生成 ``Clip`` 的函数集。
-- `🎸【效果器】<https://infmidi.readthedocs.io/zh/latest/start/effects/index>`_ : 一些快速处理 ``Clip`` 的函数集.
-- `🥁【设备】<https://infmidi.readthedocs.io/zh/latest/start/devices/index>`_ :  一些用于播放MIDI，与编曲软件交互的对象。
-- `🎺【示例】<https://infmidi.readthedocs.io/zh/latest/start/examples/index>`_ :  一些例子帮助你学习INFMIDI的用法。
-- `🎧【速查表】<https://infmidi.readthedocs.io/zh/latest/start/cheat>`_ : 查询核心类的用法，以及音乐和MIDI的相关信息汇总。
+- `🎼【安装】 <https://infmidi.readthedocs.io/zh/latest/start/install.html>`_ : 详细安装教程。如果只想使用基础功能，可以使用 ``pip install infmidi`` 进行安装。
+- `🎹【快速开始】 <https://infmidi.readthedocs.io/zh/latest/start/quickstart.html>`_ : 一些基础示例，帮助你快速入门。
+- `🎤【基础】 <https://infmidi.readthedocs.io/zh/latest/start/core/index>`_: 核心类（ ``Event``, ``Note``, ``Clip``, ``Track``, ``Midi`` ）的用法介绍。
+- `🎻【生成器】 <https://infmidi.readthedocs.io/zh/latest/start/generator/index>`_ : 一些快速生成 ``Clip`` 的函数集。
+- `🎸【效果器】 <https://infmidi.readthedocs.io/zh/latest/start/effects/index>`_ : 一些快速处理 ``Clip`` 的函数集.
+- `🥁【设备】 <https://infmidi.readthedocs.io/zh/latest/start/devices/index>`_ :  一些用于播放MIDI，与编曲软件交互的对象。
+- `🎺【示例】 <https://infmidi.readthedocs.io/zh/latest/start/examples/index>`_ :  一些例子帮助你学习INFMIDI的用法。
+- `🎧【速查表】 <https://infmidi.readthedocs.io/zh/latest/start/cheat>`_ : 查询核心类的用法，以及音乐和MIDI的相关信息汇总。
 
 特性
 ----
