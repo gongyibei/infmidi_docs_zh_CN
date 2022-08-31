@@ -14,6 +14,9 @@ INFMIDI
 
 INFMIDI是一个用Python编写的Midi编辑库，有很多高级的语法帮助你快速编辑和生成Midi文件。你也可以用它来辅助编曲、用代码创作音乐。
 
+文档: `English <https://infmidi.readthedocs.io/en/latest/>`_  | `中文文档 <https://infmidi.readthedocs.io/zh/latest/>`_ .
+
+
 安装
 ----
 
@@ -29,7 +32,7 @@ INFMIDI是一个用Python编写的Midi编辑库，有很多高级的语法帮助
 
     pip install "infmidi[all]"
 
-概述
+总览
 ----
 
 基础类
@@ -52,26 +55,26 @@ INFMIDI是一个用Python编写的Midi编辑库，有很多高级的语法帮助
 一些例子
 --------
 
-Basic
+基础
 ^^^^^
 
-Create ``Note`` object.
+创建 ``Note`` 对象.
 
 .. code-block:: python
     
     Note('A4') # Note(name="A4", value=69, frequency=440.00, location=0.00, length=1.00, velocity=127, channel=0)
 
-    # Different way to initialize.
+    # 
     Note('A4') == Note(69) == Note(440.) # True
 
-    # Raise the note by 8 semitones.
+    # 将音符升高8个半音
     Note('A4') + 8
 
-    # Delay the note 8 beats.
+    # 将音符延迟8拍
     Note('A4') >> 8
 
 
-Create and  manipulate ``Clip``  object.
+创建 ``Clip`` 对象.
 
 .. code-block:: python
 
@@ -79,34 +82,34 @@ Create and  manipulate ``Clip``  object.
 
     clip = Clip()
 
-    # Add notes to clip.
+    # 将 note 加入 clip.
     for i in range(127):
-        # `+=` is an alias of clip.add()
+        # 这里也可以用 clip.add()
         clip += Note(i, velocity=i, locationa=i)
 
-    # Get a copy of the first 8 beats.
+    # 获得clip的前8拍的副本
     new = clip[:8]
 
-    # Concat the clip with a new
+    # 拼接clip
     clip |= new
 
-    # Raise the first 8 beats notes by 10 semitones.
+    # 将clip的前8拍升高10个半音
     clip[:8] += 10
 
-    # Delay the first 8 beats notes and events 16 beats.
+    # 将前 8 拍的音符和事件延迟 16 拍.
     clip[:8] >>= 16
 
-    # Clear the notes and events for the first 8 beats.
+    # 删除前8拍的音符和事件
     clip[:8] = None 
 
-    # Repeate the clip 4 times.
+    # 将 clip 重复 4 次.
     clip **= 4
 
-    # More operations.
+    # 还有很多操作，就不一一举例了
     ...
 
 
-Write your own song.
+创作一首完整的歌
 
 .. code-block:: python
 
@@ -115,58 +118,58 @@ Write your own song.
 
     track1 = song.new_track(name='Melody track', instrument='Acoustic Guitar(steel)')
 
-    # Create some clips and add to track.
+    # 生成一些 Clip 并加到轨道里
     ...
 
     track2 = song.new_track(name='Chord track', instrument='Acoustic Grand Piano')
 
-    # Create some clips and add to track.
+    # 生成一些 Clip 并加到轨道里
     ...
 
     track3 = song.new_track(name='Drum track', is_drum=True)
 
-    # Create some clips and add to track.
+    # 生成一些 Clip 并加到轨道里
     ...
 
 
 
-Read and save midi file.
+读取和保存Midi文件
 
 .. code-block:: python
 
     from infmidi import Midi
     mid = Midi.read('/path/to/xxx.mid')
 
-    # do some changes.
+    # 做一些修改
     ...
 
     mid.save('/path/to/xxx.mid')
 
 
-Generator
+生成器
 ^^^^^^^^^
 
-Generate chord ``clip`` with ``chord()``.
+用 ``chord()`` 来生成和弦.
 
 .. code-block:: python 
 
     from infmidi.generator import sheet
     
-    # Using full name to create chord clip.
+    # 使用全名来初始化
     Cm7 = chord('C4:m7')
 
-    # Using root name and chord type to create chord clip.
+    # 使用根音与和弦类型来初始化
     CM7 = chord('C4', 'M7')
 
-    # Using intervals to create chord clip.
+    # 使用音程来初始化
     C7 = chord('C4', [4, 3, 3])
 
-    # Using degrees to create chord clip.
+    # 使用音级来初始化
     CmM7 = chord('C4', ['1', 'b3', '5', '7'])
     
 
 
-Generate progression ``clip`` with ``sheet()``
+用 ``sheet()`` 来生成和弦进行。
 
 .. code-block:: python 
 
@@ -183,16 +186,16 @@ Generate progression ``clip`` with ``sheet()``
 
 .. image:: https://raw.githubusercontent.com/gongyibei/infmidi/master/assets/readme/sheet1.png
 
-Generate drum ``clip`` with ``sheet()``
+用 ``sheet()`` 来生成一段鼓。
 
 .. code-block:: python 
 
-    # Inspired by lisp language :), elements in bars and parentheses divide the current length equally.
+    # 语法受lisp语言启发， 一个小节和一个括号内的元素平分当前长度
     HitHat = sheet('0 H 0 H | 0 H 0 (H H H) | 0 H 0 H | (0 H) (H H H)', length_per_bar=2)
     Snare  = sheet('0 0 S 0 | 0 0 S 0       | 0 0 S 0 |  0    (S 0)  ', length_per_bar=2)
     Kick   = sheet('K       | K K 0 0       | K       | (K K)  0     ', length_per_bar=2)
 
-    # Mix drum clips.
+    # 进行叠加
     drum = Kick + Snare + HitHat
 
     plot(drum ** 2)
@@ -201,9 +204,9 @@ Generate drum ``clip`` with ``sheet()``
 
 .. image:: https://raw.githubusercontent.com/gongyibei/infmidi/master/assets/readme/sheet2.png
 
-More generator functions comming soon ...
+更多的生成器函数还在路上 ...
 
-Effects
+效果器
 ^^^^^^^
 
 .. code-block:: python
@@ -218,9 +221,9 @@ Effects
             continue
         scale_map(track, key=mid.key_signature, scale='宫', inplace=True)
 
-More effect functions comming soon ...
+更多的效果器函数还在路上 ...
 
-Devices
+设备
 ^^^^^^^
 
 .. code-block:: python
@@ -233,22 +236,22 @@ Devices
 
     synth(item)
 
-More devices comming soon ...
+更多的设备函数还在路上 ...
 
-Utils
-^^^^^
+其他小工具
+^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
 
     from infmidi.utils import plot
 
-    # to generate your item (Note, Clip, Track or Midi).
+    # 生成item (Note、 Clip、 Track 或 Midi).
     ...
 
     plot(item)
 
 
-Licence
+许可条款
 -------
-INFMIDI is released under the terms of the `MIT license
+INFMIDI 使用 `MIT license
 <http://en.wikipedia.org/wiki/MIT_License>`_.
