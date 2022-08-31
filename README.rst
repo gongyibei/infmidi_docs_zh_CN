@@ -12,8 +12,6 @@ INFMIDI
     :target: https://infmidi.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
-介绍
-----
 
 INFMIDI是一个用Python编写的MIDI编辑库，有很多高级的语法帮助你快速编辑和生成MIDI文件。你也可以用它来辅助编曲、用代码创作音乐。
 
@@ -37,8 +35,43 @@ INFMIDI是一个用Python编写的MIDI编辑库，有很多高级的语法帮助
 ----
 
 - **绝对时间**：使用绝对时间而不是事件间隔来确定MIDI事件，意味着你可以很方便的在任何时间点向MIDI中添加音符或者MIDI事件。
+
+.. code:: python
+    
+    # 在第8拍添加音符C4
+    clip.add(Note('C4'), 8)
+
+
 - **时间切片**：通过时间切片，可以选定特定时间段的MIDI事件进行修改。
-- **运算符重载**：可以通过丰富的运算符对MIDI进行快速编辑。
+
+.. code:: python
+    
+    # 8拍到16拍音符升高4个半音
+    clip[8:16] += 4
+
+- **运算符重载**：通过运算符对MIDI进行快速编辑。
+
+.. code:: python
+
+    # 重复4次
+    clip **= 4
+
+- **生成器**： 通过生成器函数，来快速生成特定MIDI片段
+
+.. code:: python
+
+    # 和弦进行
+    progression = sheet('C4:M7 A4:m9|F4:M7 G4:7')
+
+- **效果器**：通过效果器函数来处理MIDI
+
+.. code:: python
+
+    # 延迟
+    delay(clip, n=3, length=0.5, decay=0.9)
+
+
+
 
 
 
