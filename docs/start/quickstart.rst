@@ -73,7 +73,6 @@
 
 .. code-block:: python
     
-    from infmidi import sheet
     txt = '''
         C4 C4 G4 G4 | A4 A4 G4 - | F4 F4 E4 E4 | D4 D4 C4 -
     '''
@@ -110,9 +109,6 @@
 用 ``sheet()`` 来生成和弦进行。
 
 .. code-block:: python 
-
-    from infmidi.generator import sheet
-    from infmidi.utils import plot
 
     txt = '''
         A4:m7 | D4:m9   | G4:7 | C4:M7     |
@@ -152,7 +148,6 @@
 
 .. code-block:: python
 
-    from infmidi import Midi
     mid = Midi.read('/path/to/xxx.mid')
 
     # 做一些修改
@@ -169,6 +164,7 @@
 .. code-block:: python
 
     from infmidi import Midi
+    
     song = Midi(name='My song', bpm=123, time_signature='4/4', key_signature='C')
 
     track1 = song.new_track(name='Melody track', instrument='Acoustic Guitar(steel)')
