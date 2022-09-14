@@ -3,8 +3,8 @@ Controller
 
 Controller 用来与编曲软件交互。
 
-配置
-----
+配置虚拟MIDI端口
+----------------
 
 Linux
 ^^^^^
@@ -19,6 +19,11 @@ Mac
 
 Windows
 ^^^^^^^
+安装 `loopMidi <http://www.tobias-erichsen.de/software/loopmidi.html>`_。
+
+其他参考
+^^^^^^^^
+- `Setting up a virtual MIDI bus <https://help.ableton.com/hc/en-us/articles/209774225-Setting-up-a-virtual-MIDI-bus>`_。
 
 
 
