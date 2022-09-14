@@ -6,7 +6,7 @@
 
 .. code-block:: python
 
-    from infmidi import Note, Clip
+    from infmidi import *
 
 
 创建音符
