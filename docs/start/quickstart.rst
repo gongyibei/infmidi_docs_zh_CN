@@ -69,6 +69,8 @@
 生成旋律
 --------
 
+用 ``sheet()`` 来生成旋律。
+
 .. code-block:: python
     
     from infmidi import sheet
@@ -84,11 +86,9 @@
 生成和弦
 --------
 
-用 ``chord()`` 来生成和弦.
+用 ``chord()`` 来生成和弦。
 
 .. code-block:: python 
-
-    from infmidi.generator import sheet
     
     # 使用全名来初始化
     Cm7 = chord('C4:m7')
@@ -101,7 +101,11 @@
 
     # 使用音级来初始化
     CmM7 = chord('C4', ['1', 'b3', '5', '7'])
-    
+
+.. hint:: 
+
+    点击 :doc:`速查表/chord <../cheat>` 查看和弦列表。目前和弦种类还不多，后续会进行添加。
+
 
 用 ``sheet()`` 来生成和弦进行。
 
@@ -161,6 +165,7 @@
 创作一首完整的歌
 ----------------
 
+
 .. code-block:: python
 
     from infmidi import Midi
@@ -180,6 +185,10 @@
 
     # 生成一些 Clip 加到轨道里
     ...
+
+.. hint:: 
+
+    点击 :doc:`速查表/GM Instrument <../cheat>` 查看GM 乐器的完整列表。
 
 
 使用效果器
@@ -207,7 +216,7 @@
 .. code-block:: python
 
     from infmidi.devices import FluidSynth
-    synth = FluidSynth('/path/to/xxx.sf2')
+    synth = FluidSynth()
 
     # to generate your item (Note, Clip, Track or Midi).
     ...
