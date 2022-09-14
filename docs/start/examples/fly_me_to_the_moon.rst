@@ -2,9 +2,6 @@ Fly Me to the Moon
 ==================
 
 
-Let's start by creating a simple version of  *Fly Me to the Moon*.
-
-
 初始化Midi对象
 --------------
 
@@ -22,7 +19,7 @@ Let's start by creating a simple version of  *Fly Me to the Moon*.
 
 .. code-block:: python
     
-    track1 = song.new_track('chord track', instrument="Acoustic Grand Piano")
+    track1 = song.new_track('chord track', instrument="5")
 
     txt = '''
         A4:m7 | D4:m9   | G4:7 | C4:M7     |
@@ -37,7 +34,7 @@ Let's start by creating a simple version of  *Fly Me to the Moon*.
 
 .. code-block:: python
     
-    track2 = song.new_track('melody track', instrument="Acoustic Grand Piano")
+    track2 = song.new_track('melody track', instrument="12")
 
     txt = '''
         (C5 -)  (-  B4)  (A4 G4)  (- F4) | (-  -)  (- G4)  (A4 C5)  (- B4) | 
