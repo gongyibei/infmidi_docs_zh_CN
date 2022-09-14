@@ -1,6 +1,12 @@
 快速开始
 ========
 
+导入包
+------
+
+.. code-block:: python
+
+    from infmidi import Note, Clip
 
 
 创建音符
@@ -29,7 +35,7 @@
 
 .. code-block:: python
 
-    from infmidi import Note, Clip
+
 
     clip = Clip()
 
@@ -63,6 +69,16 @@
 生成旋律
 --------
 
+.. code-block:: python
+    
+    from infmidi import sheet
+    txt = '''
+        C4 C4 G4 G4 | A4 A4 G4 - | F4 F4 E4 E4 | D4 D4 C4 -
+    '''
+    melody = sheet(txt)
+
+.. image:: ../../_static/imgs/sheet/note_sheet.png
+    :align: center
 
 
 生成和弦
@@ -139,8 +155,6 @@
     ...
 
     mid.save('/path/to/xxx.mid')
-
-
 
 
 
