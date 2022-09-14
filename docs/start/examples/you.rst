@@ -2,11 +2,11 @@ You
 ===
 
 
-
 初始化
 ------
 
 .. code-block:: python
+
     from infmidi import Clip, sheet, FluidSynth
 
     synth = FluidSynth()
@@ -16,6 +16,7 @@ You
 ------------
 
 .. code-block:: python
+
     txt = '''
         A2 E3 G3 - F2 C3 E3 - |
         G2 D3 F3 - C3 G3 B3 - 
@@ -27,6 +28,7 @@ You
 --------
 
 .. code-block:: python
+    
     txt = '''
         D5 - (E5 D5) C5 D5 G4 (E5 D5) C5 |
         D5 - (E5 D5) C5 C5 G5 D5      -  |
@@ -40,6 +42,7 @@ You
 ----
 
 .. code-block:: python
+
     synth(clip, bpm=80)
 
 
