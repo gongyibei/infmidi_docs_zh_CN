@@ -35,35 +35,66 @@
 
 .. code-block:: python
 
-
-
     clip = Clip()
 
-    # 将 note 加入 clip.
-    for i in range(127):
-        # 这里也可以用 clip.add()
-        clip += Note(i, velocity=i, locationa=i)
+    # 在第0拍添加音符音符 C4
+    clip += Note('C4')
+    # 删除第0拍的音符 C4
+    clip += Note('C4')
 
-    # 获得clip的前8拍的副本
-    new = clip[:8]
+    # 在第4拍添加音符音符 C4
+    clip += Note('A4') >> 4
+    # 删除该音符
+    clip -= Note('A4') >> 4
 
-    # 拼接clip
-    clip |= new
+    # 在第 8 拍添加一个力度微 77 的音符 C4
+    clip += Note('C4', velocity=77, location=8)
+    # 删除该音符 （通过名字和位置就可以确定该音符啦）
+    clip -= Note('C4', location=8)
 
-    # 将clip的前8拍升高10个半音
-    clip[:8] += 10
 
-    # 将前 8 拍的音符和事件延迟 16 拍.
-    clip[:8] >>= 16
+    # 随机添加音符
+    import random
+    for i in range(16):
+        name = random.choice(['C4', 'E4', 'G4', 'B4'])
+        clip += Note(name, location=i/2, length=1/2)
 
-    # 删除前8拍的音符和事件
-    clip[:8] = None 
 
+    # clip里的音符升高一个8度
+    clip += 8
+    # clip里的音符降低一个8度
+    clip -= 8
+
+    # clip里的音符右移动2拍
+    clip >>= 2
+    # clip里的音符左移2拍
+    clip <<= 2
+    
     # 将 clip 重复 4 次.
     clip **= 4
 
+    # 将clip拉伸2倍
+    clip ^= 2
+    # 将clip压缩一半
+    clip ^= 0.5
+
+    # 前8拍音符升高一个8度
+    clip[:8] += 8
+    # 前8拍音符降低一个8度
+    clip[:8] -= 8
+
+    # 删除4到8拍的音符和事件
+    clip[4:8] = None 
+
+    # 前4拍拉升2倍
+    clip[:4] ^= 2
+
     # 还有很多操作，就不一一举例了
     ...
+
+.. hint:: 
+
+    点击 :doc:`Clip <./core/clip>` 查看更多操作。
 
 
 生成旋律
@@ -103,7 +134,7 @@
 
 .. hint:: 
 
-    点击 :doc:`速查表/chord <../cheat>` 查看和弦列表。目前和弦种类还不多，后续会进行添加。
+    点击 :doc:`速查表/chord <./cheat>` 查看和弦列表。目前和弦种类还不多，后续会进行添加。
 
 
 用 ``sheet()`` 来生成和弦进行。
@@ -184,7 +215,7 @@
 
 .. hint:: 
 
-    点击 :doc:`速查表/GM Instrument <../cheat>` 查看GM 乐器的完整列表。
+    点击 :doc:`速查表/GM Instrument <./cheat>` 查看GM 乐器的完整列表。
 
 
 使用效果器
