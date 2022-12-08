@@ -1,7 +1,7 @@
 Controller
 ==========
 
-Controller 用来与编曲软件交互。
+Controller 可以帮你连接到编曲软件，与编曲软件交互。
 
 配置虚拟MIDI端口
 ----------------
@@ -24,7 +24,9 @@ Windows
 其他参考
 ^^^^^^^^
 - `Setting up a virtual MIDI bus <https://help.ableton.com/hc/en-us/articles/209774225-Setting-up-a-virtual-MIDI-bus>`_。
+- `Virtual MIDI Ports <https://dialogaudio.com/modulationprocessor/guides/virtual_midi/virtual_midi_setup.php>`_。
 
+https://dialogaudio.com/modulationprocessor/guides/virtual_midi/virtual_midi_setup.php
 
 
 获取可用设备
