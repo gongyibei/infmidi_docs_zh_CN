@@ -5,4 +5,5 @@
     :maxdepth: 1
 
     fluidsynth
-    controller
+    contrller
+    viewer
