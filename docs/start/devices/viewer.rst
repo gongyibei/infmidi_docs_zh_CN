@@ -8,7 +8,7 @@ Viewer
 
 .. code:: python
 
-    from infmidi.devices import Viewer
+    >>> from infmidi.devices import Viewer
     
     # 创建Clip
     >>> clip = Clip()
