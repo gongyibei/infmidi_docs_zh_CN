@@ -16,9 +16,8 @@ Track
 .. code:: python 
 
     # 设置乐器
-    Track(instrument=0)
-    Track(instrument="Acoustic Grand Piano")
-
+    track = Track(instrument=0)
+    track = Track(instrument="Acoustic Grand Piano")
     track.instrument = "Acoustic Guitar(nylon)"
 
 .. note::
